@@ -1,25 +1,31 @@
-# This is a traffic pipeline project code.
-The correct code is stored in [lifang535/traffic](https://github.com/lifang535/traffic/tree/master).
+# This is a dance pipeline project code.
+The correct code is stored in [lifang535/dance](https://github.com/lifang535/dance/tree/master).
   
 Mainly including **VideoToFrame, ObjectDetection, LicenseRecognition, PersonRecognition, and FrameToVideo.**  
 
-<img src="traffic_monitoring_pipeline.jpg" alt="Image" width="1000"/>
+<img src="dance_monitoring_pipeline.jpg" alt="Image" width="1000"/>
 
-## Traffic Monitoring Pipeline
+## Dance Monitoring Pipeline
 
-The modules are in `traffic/module`:
+The modules are in `dance/module`:
 
 - `VideoToFrame`: Extracts frames from video, and sends them to `ObjectDetection`.
 - `ObjectDetection`: Detects cars and persons, and sends them with boxes to `LicenseRecognition` and `PersonRecognition` respectively.
-- `LicenseRecognition`: Reads the text in the box of the frame, and sends frame with box and label to `FrameToVideo`.
-- `PersonRecognition`: Recognizes the face in the box of the frame, and sends frame with box and label to `FrameToVideo`.
-- `FrameToVideo`: Collects frames with boxes and labels, and combines them into a video.
+- `PostureRecognition`: Reads the posture in the box of the frame, and sends frame with box and label to `FrameToVideo`.
+- `PersonRecognition`: Recognizes the face in the box of the frame, and sends frame with box and label to `GenderRecognition`.
+- `GenderRecognition`: Recognizes the gender in the box of the frame, and sends frame with box and label to `AgeRecognition`.
+- `AgeRecognition`: Recognizes the age in the box of the frame, and sends frame with box and label to `ExpressionRecognition`.
+- `ExpressionRecognition`: Recognizes the expression in the box of the frame, and sends frame with box and label to `FrameToVideo`.
+- `FrameToVideo`: Collects frames with boxes, labels and postures, and combines them into a video.
 
 ## Model Source
 
 - `ObjectDetection`: [YOLOs Tiny](https://huggingface.co/hustvl/yolos-tiny)
-- `LicenseRecognition`: [EasyOCR](https://github.com/JaidedAI/EasyOCR)
+- `PostureRecognition`: [Openpose](https://github.com/Hzzone/pytorch-openpose)
 - `PersonRecognition`: [Face Recognition](https://github.com/ageitgey/face_recognition/tree/master)
+- `GenderRecognition`: [Gender Recognition](https://huggingface.co/rizvandwiki/gender-classification-2)
+- `AgeRecognition`: [Age Recognition](https://huggingface.co/nateraw/vit-age-classifier)
+- `ExpressionRecognition`: [Expression Recognition](https://huggingface.co/trpakov/vit-face-expression)
 
 ## Quick Start
 
@@ -29,7 +35,7 @@ Install the required libraries:
 $ pip3 install -r requirements.txt
 ```
 
-Adjust configuration in `traffic/module/configs.py`.  
+Adjust configuration in `dance/module/configs.py`.  
 
 Execute:
 
@@ -38,9 +44,11 @@ $ cd module
 $ python3 pipeline.py
 ```
 
-Then, the pipeline will read the videos from `traffic/input_video`, process them, and save the processed videos in `traffic/output_video`.
+Then, the pipeline will read the videos from `dance/input_video`, process them, and save the processed videos in `dance/output_video`.
 
 ## Docker
+
+*Note: This is an image of the traffic monitoring pipeline. Please make sure to clone the dance monitoring pipeline repository first.*
 
 ### Search for the Docker image:
 
@@ -60,11 +68,20 @@ $ docker pull lifang535/traffic_monitoring_pipeline_with_git_v3
 $ docker run --gpus all -it --rm --name temp traffic_monitoring_pipeline_with_git_v3
 ```
 
-### Execute the pipeline:
+### Pull the repository:
 
 All dependencies have been installed. Execute the following commands:
 
 ``` bash
-$ cd module
+$ cd /
+$ git clone https://github.com/lifang535/dance.git
+```
+
+### Execute the pipeline:
+
+Execute:
+
+``` bash
+$ cd dance/module
 $ python3 pipeline.py
 ```
