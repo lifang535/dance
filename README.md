@@ -1,7 +1,7 @@
 # This is a dance pipeline project code.
 The correct code is stored in [lifang535/dance](https://github.com/lifang535/dance/tree/master).
   
-Mainly including **VideoToFrame, ObjectDetection, LicenseRecognition, PersonRecognition, and FrameToVideo.**  
+Mainly including **VideoToFrame, ObjectDetection, PostureRecognition, PersonRecognition, GenderRecognition, AgeRecognition, ExpressionRecognition and FrameToVideo.**  
 
 <img src="dance_monitoring_pipeline.jpg" alt="Image" width="1000"/>
 
@@ -10,7 +10,7 @@ Mainly including **VideoToFrame, ObjectDetection, LicenseRecognition, PersonReco
 The modules are in `dance/module`:
 
 - `VideoToFrame`: Extracts frames from video, and sends them to `ObjectDetection`.
-- `ObjectDetection`: Detects cars and persons, and sends them with boxes to `LicenseRecognition` and `PersonRecognition` respectively.
+- `ObjectDetection`: Detects persons, and sends them with boxes to `PostureRecognition` and `PersonRecognition` respectively.
 - `PostureRecognition`: Reads the posture in the box of the frame, and sends frame with box and label to `FrameToVideo`.
 - `PersonRecognition`: Recognizes the face in the box of the frame, and sends frame with box and label to `GenderRecognition`.
 - `GenderRecognition`: Recognizes the gender in the box of the frame, and sends frame with box and label to `AgeRecognition`.
