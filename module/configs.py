@@ -1,0 +1,53 @@
+config = {
+    'input_video_dir': '../evaluation_input_video',
+    
+    'output_video_dir': '../evaluation_output_video',
+    
+    'video_number': 1,
+    
+    'video_start_id': 1,
+    
+    'frame_interval': 1, # ms
+    
+    'frame_size': (224, 224, 3),
+    
+    'object_detection': {
+        'device': 'cuda:3',
+        'yolo-tiny_image_processor_path': '../model/yolo-tiny/yolos-tiny_image_processor.pth',
+        'yolo-tiny_model_path': '../model/yolo-tiny/yolos-tiny_model.pth',
+    },
+    
+    'license_recognition': { # unused
+        'device': 'cuda:2',
+        'easyocr_model_path': '../model/easyocr/easyocr_model.pth',
+    },
+    
+    'person_recognition': {
+        'device': 'cpu',
+        'face_recognition_model_path': '../model/face_recognition/face_encodings.pkl',
+    },
+    
+    'gender_recognition': {
+        'device': 'cuda:3',
+        'image_processor_path': '../model/gender-classification-2/gender-classification-2_image_processor.pth',
+        'model_path': '../model/gender-classification-2/gender-classification-2_model.pth',
+    },
+    
+    'age_recognition': {
+        'device': 'cuda:1',
+        'image_processor_path': '../model/vit-age-classifier/vit-age-classifier_image_processor.pth',
+        'model_path': '../model/vit-age-classifier/vit-age-classifier_model.pth',
+    },
+    
+    'expression_recognition': {
+        'device': 'cuda:2',
+        'image_processor_path': '../model/vit-face-expression/vit-face-expression_image_processor.pth',
+        'model_path': '../model/vit-face-expression/vit-face-expression_model.pth',
+    },
+    
+    'posture_recognition': {
+        'device': 'cuda:0',
+        'image_processor_path': '../model/pytorch-openpose/body_pose_image_processor.pth',
+        'model_path': '../model/pytorch-openpose/body_pose_model.pth',
+    },
+}
